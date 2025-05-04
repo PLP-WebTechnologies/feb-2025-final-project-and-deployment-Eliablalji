@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Awesome Blog</title>
+    <style>
+        /* --- style.css content embedded here --- */
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1em 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 1em;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        nav ul li a.active {
+            font-weight: bold;
+        }
+
+        main {
+            display: flex;
+            padding: 20px;
+            max-width: 960px;
+            margin: 20px auto;
+        }
+
+        main article {
+            flex: 2;
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        main aside {
+            flex: 1;
+            background-color: #eee;
+            padding: 20px;
+            margin-left: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        main aside h3 {
+            margin-top: 0;
+        }
+
+        .post-meta {
+            color: #777;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1em 0;
+            background-color: #333;
+            color: #fff;
+            position: sticky;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 0.5em 0;
+            }
+
+            main {
+                flex-direction: column;
+            }
+
+            main aside {
+                margin-left: 0;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <h1>Welcome to My Blog</h1>
+        <p>Sharing thoughts and ideas.</p>
+    </header>
+
+    <main>
+        <article>
+            <h2>Latest Post Title</h2>
+            <p class="post-meta">Published on <time datetime="2025-05-04">May 4, 2025</time> by John Doe</p>
+            <p>This is a brief summary of the latest blog post. You can read more by clicking the link below.</p>
+            <a href="#">Read More</a>
+        </article>
+
+        <article>
+            <h2>Another Interesting Post</h2>
+            <p class="post-meta">Published on <time datetime="2025-05-01">May 1, 2025</time> by Jane Smith</p>
+            <p>A short introduction to another article on our blog. Click to explore further.</p>
+            <a href="#">Read More</a>
+        </article>
+    </main>
+
+    <aside>
+        <h3>Categories</h3>
+        <ul>
+            <li><a href="#">Technology</a></li>
+            <li><a href="#">Travel</a></li>
+            <li><a href="#">Personal</a></li>
+        </ul>
+    </aside>
+
+    <footer>
+        <p>&copy; 2025 My Awesome Blog</p>
+    </footer>
+
+    <script>
+        /* --- script.js content embedded here --- */
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contactForm'); // This will be null on index.html
+            const formMessage = document.getElementById('formMessage'); // This will be null on index.html
+
+            function isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+
+            function displayMessage(message, type) {
+                if (formMessage) {
+                    formMessage.textContent = message;
+                    formMessage.className = type; // Set class for styling
+                }
+            }
+
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(event) {
+                    event.preventDefault(); // Prevent default form submission
+
+                    const nameInput = document.getElementById('name');
+                    const emailInput = document.getElementById('email');
+                    const messageInput = document.getElementById('message');
+
+                    let isValid = true;
+
+                    if (nameInput.value.trim() === '') {
+                        displayMessage('Please enter your name.', 'error');
+                        isValid = false;
+                    }
+
+                    if (emailInput.value.trim() === '' || !isValidEmail(emailInput.value.trim())) {
+                        displayMessage('Please enter a valid email address.', 'error');
+                        isValid = false;
+                    }
+
+                    if (messageInput.value.trim() === '') {
+                        displayMessage('Please enter your message.', 'error');
+                        isValid = false;
+                    }
+
+                    if (isValid) {
+                        // In a real scenario, you would send this data to a server
+                        displayMessage('Message sent successfully!', 'success');
+                        contactForm.reset(); // Clear the form
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
